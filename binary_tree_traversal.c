@@ -8,34 +8,6 @@ typedef struct TreeNode
     struct TreeNode *left, *right;
 }TreeNode;
 
-#define SIZE 100
-int top = -1;
-TreeNode *stack[SIZE];
-
-void push(TreeNode *p){
-    if(top < SIZE -1)
-    stack[++top] = p;
-}
-
-TreeNode *pop(){
-    TreeNode *p = NULL;
-    if(top >= 0)
-    p = stack[top--];
-    return p;
-}
-
-void inorder_iter(TreeNode *root){
-    while (1)
-    {
-        for(;root;root=root->left)
-            push(root);
-        root = pop();
-        if(!root) break;
-        printf("[%d]",root->data);
-        root = root->right;
-    }    
-}
-
 TreeNode n1 = {1,NULL,NULL};
 TreeNode n2 = {4,&n1,NULL};
 TreeNode n3 = {16,NULL,NULL};
@@ -44,9 +16,42 @@ TreeNode n5 = {20,&n3,&n4};
 TreeNode n6 = {15,&n2,&n5};
 TreeNode *root = &n6;
 
+//중위 순회
+void inorder(TreeNode *root){
+    if(root != NULL){
+        inorder(root->left);
+        printf("[%d] ",root->data);
+        inorder(root->right);
+    }
+}
+//전위 순회
+void preorder(TreeNode *root){
+    if(root != NULL){
+        printf("[%d] ",root->data);
+        preorder(root->left);
+        preorder(root->right);
+    }
+}
+//후위 순휘
+void postoder(TreeNode *root){
+    if(root != NULL){
+        postoder(root->left);
+        postoder(root->right);
+        printf("[%d] ", root->data);
+    }
+}
+
 int main(void){
-    printf("���� ��ȸ=");
-    inorder_iter(root);
+    printf("중위 순회=");
+    inorder(root);
+    printf("\n");
+
+    printf("전위 순회=");
+    preorder(root);
+    printf("\n");
+
+    printf("후위 순회=");
+    postoder(root);
     printf("\n");
     return 0;
 }
