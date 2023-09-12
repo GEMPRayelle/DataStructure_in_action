@@ -22,6 +22,7 @@
 //링크표현법-포인터를 사용하여 표현 
 
 //전위순회, *중위순회, 후위순회
+//
 #include <stdio.h>
 #include <stdlib.h>
 
